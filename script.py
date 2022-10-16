@@ -1,53 +1,45 @@
 def get_file_headers(f):
-    header_full_name = {"Postal": "Postal Abbr", "FIPS": "FIPS Code"}
-    headers_with_line_ending = list(header_full_name)
-    headers_to_ignore = ["Abbr.", "Code"]
-    cluttered_file_header_list = [f.readline() for _ in range(5)]
-    header_list = []
+    file_header_list = [f.readline() for _ in range(5)]
+    header_with_line_endings = ["Postal", "FIPS"]
+    file_header_list = [item for string in file_header_list for item in string.split()]
+    result = []
 
-    for headers_group_string in cluttered_file_header_list:
-        headers_group__list = headers_group_string.split()
-        for header in headers_group__list:
-            header = header.strip()
-            if header in headers_to_ignore or header in header_list:
-                continue
-            elif header in headers_with_line_ending:
-                header = header_full_name[header]
-                if header not in header_list:
-                    header_list.append(header)
-            else:
-                header_list.append(header)
+    index = 0
+    while index < len(file_header_list):
+        value = file_header_list[index]
 
-    return header_list
-
-
-def merge_details(data, header_list):
-    state_detail = {}
-    for index, header in enumerate(header_list):
-        state_detail[header] = data[index].strip()
-    return state_detail
-
-
-with open("data.txt", "r") as f:
-    file_header_list = get_file_headers(f)
-    file_data = f.readlines()
-    state_detail_list = []
-
-    for data in file_data:
-        data_split = data.split("    ")
-        length_of_data = len(data_split)
-
-        if length_of_data == 6:
-            first_state_detail = data_split[:3]
-            second_state_detail = data_split[3:]
-            state_detail_list.append(merge_details(first_state_detail, file_header_list))
-            state_detail_list.append(merge_details(second_state_detail, file_header_list))
+        if value in header_with_line_endings:
+            index += 1
+            next_value = file_header_list[index]
+            if value + next_value not in result:
+                result.append(value + next_value)
         else:
-            state_detail_list.append(merge_details(data_split, file_header_list))
+            if value not in result:
+                result.append(value)
+        index += 1
+    return result
 
 
-with open("state_detail.txt", "w") as f:
-    f.write(str(state_detail_list))
+def main():
+    with open("data.txt", "r") as f:
+        file_header_list = get_file_headers(f)
+        file_data = [state_info.strip() for line in f.readlines() for state_info in line.split("    ")]
+        state_detail_list = []
+
+        index = 0
+        while index < len(file_data) - 1:
+            state_info = {}
+            for header in file_header_list:
+                state_info[header] = file_data[index]
+                index += 1
+            state_detail_list.append(state_info)
+
+        return state_detail_list
+
+
+if __name__ == "__main__":
+    with open("state_detail.txt", "w") as f:
+        f.write(str(main()))
 
 
 
