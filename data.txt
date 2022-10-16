@@ -1,5 +1,11 @@
+State    Postal
+Abbr.    FIPS
+Code    State    Postal
+Abbr.    FIPS
+Code
 Alabama    AL    01    Nebraska    NE    31
 Alaska    AK    02    Nevada    NV    32
+Arizona    AZ    04    New Hampshire    NH    33
 Arkansas    AR    05    New Jersey    NJ    34
 California    CA    06    New Mexico    NM    35
 Colorado    CO    08    New York    NY    36
