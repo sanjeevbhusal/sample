@@ -1,11 +1,21 @@
 import unittest
+from parameterized import parameterized
 from calculate_ngram import get_ngrams
 
 
 class TestNgrams(unittest.TestCase):
-    def test_ngram(self):
-        test_data = {"text": "The sun rises in the east", "ngram": 2}
-        expected_output = ["The sun", "sun rises", "rises east"]
-        result = get_ngrams(test_data["text"], test_data["ngram"])
-        self.assertEqual(result, expected_output)
+    @parameterized.expand([
+        ["", "The sun rises in the east", 1, ["The", "sun", "rises", "east"]],
+        ["", "The sun rises in the east", 2, ["The sun", "sun rises", "rises east"]],
+        ["", "The sun rises in the east", 3, ['The sun rises', 'sun rises east']],
+        ["", "", 3, []]
+    ])
+    def test_ngrams(self, name, text, ngram, expected_output):
+       result = get_ngrams(text, ngram)
+       self.assertEqual(result, expected_output)
+
+
+if __name__ == "__main__":
+    print(dir(TestNgrams))
+    unittest.main()
 
