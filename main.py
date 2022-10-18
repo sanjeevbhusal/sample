@@ -1,4 +1,6 @@
 import csv
+import itertools
+import json
 from calculate_ngram import get_ngrams
 from collections import defaultdict
 
@@ -19,10 +21,13 @@ for note in note_list:
     for word in three_ngram:
         three_ngram_words_dict[word] += 1
 
-top_20_two_ngram = [key for key, value in sorted(two_ngram_words_dict.items(), key=lambda x: x[1], reverse=True)][:20]
-top_20_three_ngram = [key for key, value in sorted(three_ngram_words_dict.items(), key=lambda x: x[1], reverse=True)][:20]
 
-with open("top_20.txt", "w") as f:
-    f.write(str({"top_20_two_ngram": top_20_two_ngram}))
-    f.write("\n")
-    f.write(str({"top_20_three_ngram": top_20_three_ngram}))
+top_20_two_ngram = dict(itertools.islice(
+    {key: value for key, value in sorted(two_ngram_words_dict.items(), key=lambda x: x[1], reverse=True)}.items(), 20))
+top_20_three_ngram = dict(itertools.islice(
+    {key: value for key, value in sorted(three_ngram_words_dict.items(), key=lambda x: x[1], reverse=True)}.items(), 20))
+
+
+with open("ngrams.json", "w") as f:
+    json.dump({"top_20_two_ngram": top_20_two_ngram, "top_20_three_ngram": top_20_three_ngram}, f)
+
