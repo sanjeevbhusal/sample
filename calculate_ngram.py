@@ -10,3 +10,6 @@ def get_ngrams(text, ngram_count):
     temp = zip(*[words[i:] for i in range(ngram_count)])
     ans = [' '.join(ngram) for ngram in temp]
     return ans
+
+
+
