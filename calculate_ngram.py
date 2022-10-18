@@ -10,7 +10,7 @@ ignore_words.update(ignore_words_project_specific)
 
 
 def is_date(text):
-    return re.search("./../..", text) or re.search("././..", text)
+    return re.search("./../..", text) or re.search("././..", text) or re.search("..:..", text)
 
 
 def get_ngrams(text, ngram_count):
