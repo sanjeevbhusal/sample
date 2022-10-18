@@ -1,5 +1,4 @@
 import csv
-import itertools
 import json
 from calculate_ngram import get_ngrams
 from collections import defaultdict
