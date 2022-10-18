@@ -1,1 +1,46 @@
-{"top_20_two_ngram": {"-- Note": 827, "Note added": 827, "North Carolina": 87, "added 6/6/13": 76, "added 9/15/15": 71, " --": 60, "added 6/12/13": 53, "Travel Tourism": 48, "Tourism Site": 38, "Commission --": 32, "added 11/12/15": 30, "added 8/28/15": 29, "Authority --": 28, "6/6/13 18:08": 26, "added 6/7/13": 25, "Lottery --": 25, "State Board": 23, "added 8/27/15": 23, "added 9/11/15": 22, "added 9/14/15": 22}, "top_20_three_ngram": {"-- Note added": 827, "Note added 6/6/13": 76, "Note added 9/15/15": 71, " -- Note": 60, "Note added 6/12/13": 53, "Travel Tourism Site": 38, "Commission -- Note": 32, "Note added 11/12/15": 30, "Note added 8/28/15": 29, "Authority -- Note": 28, "added 6/6/13 18:08": 26, "Note added 6/7/13": 25, "Lottery -- Note": 25, "Note added 8/27/15": 23, "Note added 9/11/15": 22, "Note added 9/14/15": 22, "Board -- Note": 17, "The North Carolina": 17, "Note added 1/10/14": 16, "National Guard --": 16}}
+{
+    "top_20_two_ngram": {
+        "-- Note": 827,
+        "Note added": 827,
+        "North Carolina": 87,
+        "added 6/6/13": 76,
+        "added 9/15/15": 71,
+        " --": 60,
+        "added 6/12/13": 53,
+        "Travel Tourism": 48,
+        "Tourism Site": 38,
+        "Commission --": 32,
+        "added 11/12/15": 30,
+        "added 8/28/15": 29,
+        "Authority --": 28,
+        "6/6/13 18:08": 26,
+        "added 6/7/13": 25,
+        "Lottery --": 25,
+        "State Board": 23,
+        "added 8/27/15": 23,
+        "added 9/11/15": 22,
+        "added 9/14/15": 22
+    },
+    "top_20_three_ngram": {
+        "-- Note added": 827,
+        "Note added 6/6/13": 76,
+        "Note added 9/15/15": 71,
+        " -- Note": 60,
+        "Note added 6/12/13": 53,
+        "Travel Tourism Site": 38,
+        "Commission -- Note": 32,
+        "Note added 11/12/15": 30,
+        "Note added 8/28/15": 29,
+        "Authority -- Note": 28,
+        "added 6/6/13 18:08": 26,
+        "Note added 6/7/13": 25,
+        "Lottery -- Note": 25,
+        "Note added 8/27/15": 23,
+        "Note added 9/11/15": 22,
+        "Note added 9/14/15": 22,
+        "Board -- Note": 17,
+        "The North Carolina": 17,
+        "Note added 1/10/14": 16,
+        "National Guard --": 16
+    }
+}
