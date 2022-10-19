@@ -65,27 +65,27 @@ def dump_json(file_name: str, data: dict):
         json.dump(data, f)
 
 
-def dump_csv(filename, data_list: list, fieldnames: list):
+def dump_csv(filename, data_list: dict, fieldnames: list):
     with open(filename, "w") as f:
         writer = csv.DictWriter(f, fieldnames)
         writer.writeheader()
-        for text in data_list:
-            writer.writerow(text)
+        for topic, notes in data_list.items():
+            writer.writerow({"topic": topic, "notes": notes})
 
 
 def filter_words(word_list: list, keys_to_filter: dict):
     return [word for word in word_list if word in keys_to_filter]
 
 
-def get_filtered_text(text_ngram: dict, filtered_two_ngram, filtered_three_ngram):
-    filtered_text = []
+def get_filtered_text(text_ngram: dict, keys_to_filter: dict):
+    word_to_ngram = defaultdict(list)
     for text, ngram in text_ngram.items():
-        two_ngram_list, three_ngram_list = ngram[2], ngram[3]
-        filtered_text.extend(
-            [{"word": word, "note": text} for word in filter_words(two_ngram_list, filtered_two_ngram)])
-        filtered_text.extend(
-            [{"word": word, "note": text} for word in filter_words(three_ngram_list, filtered_three_ngram)])
-    return filtered_text
+        ngram[2].extend(ngram[3])
+        total_ngrams = set(ngram[2])
+        for selected_ngram in keys_to_filter:
+            if selected_ngram in total_ngrams:
+                word_to_ngram[selected_ngram].append(text)
+    return word_to_ngram
 
 
 def main():
@@ -109,8 +109,8 @@ def main():
     dump_json("top_ngrams.json",
               {"top_20_two_ngram": two_ngram_sliced, "top_20_three_ngram": three_ngram_sliced})
 
-    filtered_text = get_filtered_text(text_ngram, two_ngram_sliced, three_ngram_sliced)
-    dump_csv("ngrams_text.csv", filtered_text, ["word", "note"])
+    filtered_text = get_filtered_text(text_ngram, {**two_ngram_sliced, **three_ngram_sliced})
+    dump_csv("ngrams_text.csv", filtered_text, ["topic", "notes"])
 
 
 if __name__ == "__main__":
